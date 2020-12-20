@@ -48,8 +48,6 @@ public class AccountController {
             return new ResponseEntity<>(new AccountRegistrationResult(false, messageService.getMessage(ACCOUNT_EXISTS_DESCRIPTION), null), HttpStatus.CONFLICT);
         }
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(8);
-
         String accountPassword = generator.generate(PASSWORD_LENGTH);
         accountDao.create(accountName, accountPassword);
 
