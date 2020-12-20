@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -22,6 +21,7 @@ public class UrlShortenerUserDetailsService implements UserDetailsService {
         this.accountDao = accountDao;
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (!accountDao.existsByName(username)) {
@@ -30,7 +30,7 @@ public class UrlShortenerUserDetailsService implements UserDetailsService {
         }
         Account account = accountDao.getByName(username);
 
-        return new User(account.getUsername(), account.getPassword(), Collections.singletonList(() -> "ROLE_ADMIN"));
+        return new User(account.getUsername(), account.getPassword(), Collections.singletonList(() -> "ADMIN"));
     }
 }
 
